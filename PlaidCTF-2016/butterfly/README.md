@@ -5,6 +5,10 @@ This challenge was a "pwnable" worth 150 points:
 
 > Sometimes the universe smiles upon you. And sometimes, well, you just have to roll your  sleeves up and do [things yourself](https://github.com/burlingpwn/Writeups/raw/butterfly/PlaidCTF-2016/butterfly/butterfly_33e86bcc2f0a21d57970dc6907867bed). Running at butterfly.pwning.xxx:9999
 
+Writeup by: [brianmwaters](https://github.com/brianmwaters)
+
+Collaborators: [mut3](https://github.com/mut3)
+
 Reversing
 ---------
 
