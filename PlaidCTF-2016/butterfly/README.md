@@ -89,7 +89,7 @@ The basic block then uses ```mprotect``` to set the page back to RX permissions.
 Exploitation
 ------------
 
-Rather than use our brains, we opted to write a script (```brutus.py```) to flip every single bit in memory and log the result. The output was a bit hard to parse, so we zeroed in on bits in the two most interesting instructions that occurred after the flip: the calls to ```mprotect``` and ```puts```.
+Rather than use our brains, we opted to write a script (```brutus.py```) to flip every single bit in the text segment and log the result. The output was a bit hard to parse, so we zeroed in on bits in the two most interesting instructions that occurred after the flip: the calls to ```mprotect``` and ```puts```.
 
 We noticed that when we flipped one of the bits in the second ```mprotect`` call, the program cycled back up to somewhere in the initialization routines, and printed the cryptic message about cosmic rays again. This would allow us to flip more bits. The integer input that caused this to happen was 33571270. Try it yourself!
 
