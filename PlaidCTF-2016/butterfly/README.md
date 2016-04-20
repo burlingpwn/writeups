@@ -89,13 +89,13 @@ The basic block then uses ```mprotect``` to set the page back to RX permissions.
 Exploitation
 ------------
 
-Rather than use our brains, we opted to write a script (```brutus.py```) to flip every single bit in memory and log the result. The output was a bit hard to parse, so we zeroed in on bits in the two most interesting instructions that occurred after the flip: the calls to ```mprotect``` and ```puts```.
+Rather than use our brains, we opted to write a script (```brutus.py```) to flip every single bit in the text segment and log the result. The output was a bit hard to parse, so we zeroed in on bits in the two most interesting instructions that occurred after the flip: the calls to ```mprotect``` and ```puts```.
 
-We noticed that when we flipped one of the bits in the second ```mprotect`` call, the program cycled back up to somewhere in the initialization routines, and printed the cryptic message about cosmic rays again. This would allow us to flip more bits. The integer input that caused this to happen was 33571270. Try it yourself!
+We noticed that when we flipped one of the bits in the second ```mprotect``` call, the program cycled back up to somewhere in the initialization routines, and printed the cryptic message about cosmic rays again. This would allow us to flip more bits. The integer input that caused this to happen was 33571270. Try it yourself!
 
-At this point, we had everything we needed. We grabbed a pretty basic local ```execve``` shellcode off [exploit-db](https://www.exploit-db.com/) and xored it with the first bytes of the text segment at ```0x400000```. The 1's in the output were the bits we needed to flip. We also calculated the integer inputs corresponding to these bits.
+At this point, we had everything we needed. We grabbed a pretty basic local ```execve``` shellcode off [exploit-db](https://www.exploit-db.com/) and xored it with the beginning of the text segment at ```0x400000```. The 1's in the output were the bits we needed to flip. We also calculated the integer inputs corresponding to these bits.
 
-We also turned a later instruction into a ```jmp 0x400000``` using the same technique. We exited the loop by un-flipping that original bit, and the program fell through to our ```jmp``` instruction. Pwnage had!!!
+We also turned a later instruction into a ```jmp 0x400000``` using the same technique. Finally, we needed to undo the loop by un-flipping that original bit, and the program would fall through to our ```jmp``` instruction. Pwnage would be ours!!!
 
 ```
 brian@katahdin:butterfly$ ./exploit.py
@@ -118,3 +118,6 @@ In summary, here's the overall structure of our exploit:
 - Un-flip the bit that caused the infinite loop.
 - Capture the flag.
 
+The title
+---------
+By the way, in case it wasn't obvious, the reference to cosmic rays in the programs' prompt is referring to the fact that cosmic rays can flip bits inside a computer (that's one reason servers use ECC RAM). Butterfly, though, that's a reference to [this](https://xkcd.com/378/) xkcd comic about programming using butterflies and cosmic rays: ![xkcd comic](https://imgs.xkcd.com/comics/real_programmers.png).
