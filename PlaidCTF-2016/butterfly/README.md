@@ -117,3 +117,7 @@ In summary, here's the overall structure of our exploit:
 - Flip the bits that will transform a later instruction into a ```jmp``` into the shellcode.
 - Un-flip the bit that caused the infinite loop.
 - Capture the flag.
+
+The title
+---------
+By the way, in case it wasn't obvious, the reference to cosmic rays in the programs' prompt is referring to the fact that cosmic rays can flip bits inside a computer (that's one reason servers use ECC RAM). Butterfly, though, that's a reference to [this](https://xkcd.com/378/) xkcd comic about programming using butterflies and cosmic rays: ![xkcd comic](https://imgs.xkcd.com/comics/real_programmers.png).
