@@ -1,0 +1,6 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+ulimit -S -c 0 -t 20 -f 1000000 -v 1000000
+ulimit -H -c 0 -t 20 -f 1000000 -v 1000000
+exec nice -n 15 timeout -s 9 300 /home/problem/unix_time_formatter
