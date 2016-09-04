@@ -10,8 +10,8 @@ __challenges solved:__
 |---                            |---        |---|
 |[Kitty](kitty/)                |Web        |70|
 |Smashing Profit                |Pwn        |60|
-|[Dear diary](dear_diary)       |Pwn        |60|
-|Exposed!                       |Web        |60|
+|[Dear diary](dear_diary/)      |Pwn        |60|
+|[Exposed!](exposed/)           |Web        |60|
 |[Thor's a hacker now](thor/)   |Misc       |55|
 |Demo                           |Pwn        |55|
 |Corrupt Transmission           |Forensics  |50|
