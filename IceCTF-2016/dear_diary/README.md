@@ -45,13 +45,13 @@ rude!
 brian@katahdin:dear_diary$
 ```
 
-The object allocation turned out to be stack-based, not heap-based, so no use after free here. I spent waaay too much time looking for some kind of overflow, but everything was buttoned up tight. Then I found it, staring me in the face:
+The object allocation turned out to be stack-based, not heap-based, so no use after free here. I spent waaay too much time looking for some kind of overflow, but everything was buttoned up tight. Then I found it, staring me in the face, and it wasn't an overflow:
 
 ![IDA screenshot of format string vulnerability](format string vulnerability.png)
 
 In case you can't read that, `printf` is being called with a single, user-controlled argument. This explains why the binary exits if any of our secrets contain the letter `n` - it's sanitizing the input against the `printf` `%n` specifier that can lead to arbitrary code execution!
 
-That's okay though, because we don't need the `%n` specifier here anyway. The binary reads `flag.txt` into memory on startup and stores it's address near the top of `main`'s stack frame (well, actually, the bottom, since the stack grows down). Since the vulnerable `printf` call is in a stack frame directly below `main`, we can get it to read past all the crap we don't care about with a bunch of `%x`'s, and then read the flag out with `%s`. I don't think we even used the debugger to find the right number of `%x`'s; we just kept adding more 'til it worked:
+That's okay though, because we don't need the `%n` specifier here anyway. The binary reads `flag.txt` into memory on startup and stores it somewhere in the data segment. The secrets are stored in `main`'s stack frame. We used two secrets - one containing the address of the flag (there was no PIE so this was known); the other containing a format string payload. The vulnerable `printf` call happens in a stack frame directly below `main` (which is where we stored the address of the flag), so we can get `printf` to read past all the crap we don't care about by making the payload a bunch of `%x`'s followed by a `%s` (the `%s` will read out the actual flag). I don't think we even used the debugger to find the right number of `%x`'s; we just kept adding more 'til it worked:
 
 ```
 #!/usr/bin/env python2
