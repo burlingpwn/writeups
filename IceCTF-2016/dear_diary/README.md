@@ -1,6 +1,8 @@
 dear_diary
 ==========
 
+**Solved by:** [int10h](https://github.com/brianmwaters) and [mut3](https://github.com/mut3)
+
 > We all want to keep our secrets secure and what is more important than our precious diary entries? We made this highly secure diary service that is sure to keep all your boy crushes and edgy poems safe from your parents. `nc diary.vuln.icec.tf 6501`
 
 The binary has a pretty straightforward menu-based interface that lets you create objects and print them. We might be looking for a heap-based vulnerability here:
