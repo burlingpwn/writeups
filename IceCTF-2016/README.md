@@ -1,6 +1,6 @@
-# burlingpwn writeups for [IceCTF 2016
-## The Icelandic Hacking Competition
-### 12. August - 26. August](https://icec.tf/)
+# burlingpwn writeups for IceCTF 2016
+## [The Icelandic Hacking Competition](https://icec.tf/)
+### 12. August - 26. August
 
 __participating members:__ [int10h](https://github.com/brianmwaters), [mut3](https://github.com/mut3)
 
