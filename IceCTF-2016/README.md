@@ -12,7 +12,7 @@ __challenges solved:__
 |Smashing Profit                |Pwn        |60|
 |Dear diary                     |Pwn        |60|
 |Exposed!                       |Web        |60|
-|Thor's a hacker now            |Misc       |55|
+|[Thor's a hacker now](thor/)   |Misc       |55|
 |Demo                           |Pwn        |55|
 |Corrupt Transmission           |Forensics  |50|
 |Flag Storage                   |Web        |50|
