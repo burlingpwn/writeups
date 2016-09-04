@@ -10,7 +10,7 @@ __challenges solved:__
 |---                            |---        |---|
 |Kitty                          |Web        |70|
 |Smashing Profit                |Pwn        |60|
-|Dear diary                     |Pwn        |60|
+|[Dear diary](dear_diary)       |Pwn        |60|
 |Exposed!                       |Web        |60|
 |Thor's a hacker now            |Misc       |55|
 |Demo                           |Pwn        |55|
