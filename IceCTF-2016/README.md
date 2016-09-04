@@ -8,7 +8,7 @@ __challenges solved:__
 
 |Challenge                      |Type       |Value|
 |---                            |---        |---|
-|Kitty                          |Web        |70|
+|[Kitty](kitty/)                |Web        |70|
 |Smashing Profit                |Pwn        |60|
 |Dear diary                     |Pwn        |60|
 |Exposed!                       |Web        |60|
