@@ -12,6 +12,7 @@ This one was a hacketedy hack in the truest sense. We're given some kind of save
 I was using Wireshark for a different problem when I was reminded that its stream view can interpret streams as EBCDIC text.
 
 ![Decoding EBCDIC with Wireshark](wireshark-ebcdic.png)
+
 *To get here, right click a TCP segment and select "Follow TCP stream." You can then choose to decode the stream in a handful of different ways, including EBCDIC.*
 
 Using netcat, I sent the file to myself over the loopback interface, and sniffed the connection in Wireshark. Even when interpreted as EBCDIC, the file isn't plain text, but Wireshark's stream view gives us something quick and dirty:

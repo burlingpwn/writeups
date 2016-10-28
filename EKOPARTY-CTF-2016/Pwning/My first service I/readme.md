@@ -10,7 +10,7 @@ Alternate server: 7e0a98bb084ec0937553472e7aafcf68ff96baf4.ctf.site 35000
 Basically, this one asks you for a "secret key" over the network.
 I hate to say it, but this one's almost exactly the same as [Chile](https://ctftime.org/writeup/4374) from H4ck1t this year. We netcat to `9a958a70ea8697789e52027dc12d7fe98cad7833.ctf.site:35000`, ostensibly to enter a "secret key", but it's pretty clear from messing around that the server is vulnerable to a format string bug (we aren't given a binary):
 
-``
+```
 $ nc 9a958a70ea8697789e52027dc12d7fe98cad7833.ctf.site 35000
 Welcome to my first service
 Please input the secret key: %x
