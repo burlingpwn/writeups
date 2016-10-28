@@ -55,3 +55,5 @@ Yeah, I can wait for that.
 `EKO{DCEUslnl7DeiLWSdCLi0l1fxdc8}`
 
 However, this wasn't the right flag. At this point, I moved on to something less time-consuming for 50 points.
+
+EDIT: [These guys](https://0day.work/ekoparty-ctf-2016-writeups/#forensics50) managed to figure it out; my interpretation of the above VB code was way off. Also, it sounds like they managed to "unlock" the macros w/ Libreoffice, without having to do the trick I linked to above.
